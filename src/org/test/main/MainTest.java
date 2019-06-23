@@ -6,6 +6,7 @@ public class MainTest {
         // TODO Auto-generated method stub
         System.out.println("Hello World!");
         System.out.println("Hello Algorithm!");
+        System.out.println("Hello Data Structure!");
     }
 
 }
