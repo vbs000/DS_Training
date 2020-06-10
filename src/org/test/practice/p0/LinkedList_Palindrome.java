@@ -25,6 +25,8 @@ public class LinkedList_Palindrome {
 
         System.out.println(lkList.isPalindrome(lkList.head));
 
+        System.out.println(""+System.currentTimeMillis()/1000);
+
 
     }
 
