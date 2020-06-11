@@ -75,18 +75,22 @@ public class Solution_GCD_LCM {
                 result[i_n1 + i_n2] = sum % 10;
                 i_n2++;
             }
-            if (carry > 0)
+            if (carry > 0){
                 result[i_n1 + i_n2] += carry;
+            }
             i_n1++;
         }
         int i = result.length - 1;
-        while (i >= 0 && result[i] == 0)
+        while (i >= 0 && result[i] == 0){
             i--;
-        if (i == -1)
+        }
+        if (i == -1){
             return "0";
+        }
         String s = "";
-        while (i >= 0)
+        while (i >= 0){
             s += (result[i--]);
+        }
         return s;
     }
 }
