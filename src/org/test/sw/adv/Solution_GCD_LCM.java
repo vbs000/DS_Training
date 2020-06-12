@@ -31,9 +31,19 @@ public class Solution_GCD_LCM {
     //    if(a==b)return a;
     //    return a>b?gcd(a-b,b):gcd(b-a,a);
     //}
-    static long gcd(long a,long b){
-        return a%b==0?b:gcd(b,a%b);
+//    static long gcd(long a,long b){
+//        return a%b==0?b:gcd(b,a%b);
+//    }
+
+    static long gcd(long m,long n) {
+        while(n!=0) {
+            long rem = m % n;
+            m = n;
+            n = rem;
+        }
+        return m;
     }
+
 
 
     public static String longDivision(String number,long divisor) {
