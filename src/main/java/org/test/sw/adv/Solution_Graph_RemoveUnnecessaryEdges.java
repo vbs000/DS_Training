@@ -74,15 +74,7 @@ public class Solution_Graph_RemoveUnnecessaryEdges {
             Answer = L;//默认为最大边数
             for(int x=0;x<L;x++){
                 g.removeEdge(edges[0][x]-1,edges[1][x]-1);
-                boolean ifCanRemove = true;
-                for(int y=0;y<=x;y++){
-                    if(!g.isReachable(edges[0][x]-1, edges[1][x]-1)){
-                        ifCanRemove = false;
-                        break;
-                    }
-                }
-                //System.out.println(edges[0][x]+"->"+edges[1][x]+":"+ifCanRemove);
-                if (ifCanRemove){//如果删除这条边，关联还存在，不仅仅是自身，还有前面的关联同样存在
+                if (g.isReachable(edges[0][x]-1, edges[1][x]-1)){//如果删除这条边，关联还存在
                     Answer--;
                 }else{//否则加回来
                     g.addEdge(edges[0][x]-1,edges[1][x]-1);
