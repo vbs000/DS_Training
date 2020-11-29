@@ -50,6 +50,7 @@ public class Solution_matrix_pick_number {
     };
     private static int PT_COUNT;
     private static List<int[]> ptList;
+    private static List<List<int[]>> cachedPtList;
     private static List<int[]> mvList;
     private static int Answer;
 
@@ -72,6 +73,7 @@ public class Solution_matrix_pick_number {
 
             ptList = new ArrayList<>();
             mvList = new ArrayList<>();
+            cachedPtList = new ArrayList<>();
             fillList(N,M,ptList,mvList);//col first
             calc(ptList,mvList);
             fillList(M,N,ptList,mvList);//row first
@@ -94,29 +96,53 @@ public class Solution_matrix_pick_number {
     private static void calc(List<int[]> ptList,List<int[]> mvList){
 
         while (ptList.size() > 0) {
-
-            PT_COUNT = ptList.size();
-            //System.out.println("pt size:"+ptList.size());
-            List<List<int[]>> planList = new ArrayList<>();
-            for (int x = 0; x < ptList.size(); x++) {
-                List<int[]> subPlanList = new ArrayList<>();
-                for (int n = 0; n <= mvList.get(x)[0]; n++) {
-                    for (int m = 0; m <= mvList.get(x)[1]; m++) {
-                        subPlanList.add(new int[]{ptList.get(x)[0] + n, ptList.get(x)[1] + m});
-                        //System.out.println("x:"+x+".pt:"+ptList.get(x)[0]+"+"+n+","+ptList.get(x)[1]+"+"+m);
+            if(!ifListCached(ptList)){
+                List<int[]> tempCacheList = new ArrayList<>();
+                tempCacheList.addAll(ptList);
+                cachedPtList.add(tempCacheList);
+                PT_COUNT = ptList.size();
+                //System.out.println("pt size:"+ptList.size());
+                List<List<int[]>> planList = new ArrayList<>();
+                for (int x = 0; x < ptList.size(); x++) {
+                    List<int[]> subPlanList = new ArrayList<>();
+                    for (int n = 0; n <= mvList.get(x)[0]; n++) {
+                        for (int m = 0; m <= mvList.get(x)[1]; m++) {
+                            subPlanList.add(new int[]{ptList.get(x)[0] + n, ptList.get(x)[1] + m});
+                            //System.out.println("x:"+x+".pt:"+ptList.get(x)[0]+"+"+n+","+ptList.get(x)[1]+"+"+m);
+                        }
                     }
+                    planList.add(subPlanList);
                 }
-                planList.add(subPlanList);
+
+                Stack<int[]> calPlan = new Stack<>();
+                visited = new boolean[N][M];
+
+                dfs(planList, 0, calPlan);
             }
 
-            Stack<int[]> calPlan = new Stack<>();
-            visited = new boolean[N][M];
-
-            dfs(planList, 0, calPlan);
             ptList.remove(ptList.size() - 1);
         }
     }
-
+    private static boolean ifListCached(List<int[]> compareList){
+        for(List<int[]> tempList:cachedPtList){
+            if(tempList.size()== compareList.size()){
+                int cacheCnt = 0;
+                for(int i=0;i<tempList.size();i++){
+                    for(int j=0;j<compareList.size();j++){
+                        if(tempList.get(i)[0] == compareList.get(j)[0]
+                        && tempList.get(i)[1] == compareList.get(j)[1]){
+                            cacheCnt++;
+                            break;
+                        }
+                    }
+                }
+                if(cacheCnt == tempList.size()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private static void dfs(List<List<int[]>> planList, int deep, Stack<int[]> calPlan) {
         if (deep == PT_COUNT) {
