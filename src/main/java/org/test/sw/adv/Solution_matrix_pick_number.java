@@ -26,7 +26,13 @@ public class Solution_matrix_pick_number {
 //        1 2 3 4 5
 //        6 7 8 9 10
 
-    //输出 99
+    //输出
+    //#1 99
+    //#2 110
+    //#3 4
+    //#4 20
+    //#5 7
+    //#6 24
     private static int T;
     private static int N;//col
     private static int M;//row
@@ -43,6 +49,8 @@ public class Solution_matrix_pick_number {
             {-1, -1}
     };
     private static int PT_COUNT;
+    private static List<int[]> ptList;
+    private static List<int[]> mvList;
     private static int Answer;
 
 
@@ -59,47 +67,57 @@ public class Solution_matrix_pick_number {
                     matrix[n][m] = sc.nextInt();
                 }
             }
-            //从左上角开始放置可能点
-            List<int[]> ptList = new ArrayList<>();
-            //右侧与下方余量
-            List<int[]> mvList = new ArrayList<>();
-
-            for (int n = 0; n < N; n = n + 2) {
-                for (int m = 0; m < M; m = m + 2) {
-                    ptList.add(new int[]{n, m});
-                    mvList.add(new int[]{formatZero(N - n - 1), formatZero(M - m - 1)});
-                    //System.out.println("n:"+n+","+"m:"+m+","+formatZero(N-n-1)+","+formatZero(M-m-1));
-                }
-            }
             Answer = 0;
-            while (ptList.size() > 0) {
 
-                PT_COUNT = ptList.size();
-                //System.out.println("pt size:"+ptList.size());
-                List<List<int[]>> planList = new ArrayList<>();
-                for (int x = 0; x < ptList.size(); x++) {
-                    List<int[]> subPlanList = new ArrayList<>();
-                    for (int n = 0; n <= mvList.get(x)[0]; n++) {
-                        for (int m = 0; m <= mvList.get(x)[1]; m++) {
-                            subPlanList.add(new int[]{ptList.get(x)[0] + n, ptList.get(x)[1] + m});
-                            //System.out.println("x:"+x+".pt:"+ptList.get(x)[0]+"+"+n+","+ptList.get(x)[1]+"+"+m);
-                        }
-                    }
-                    planList.add(subPlanList);
-                }
 
-                Stack<int[]> calPlan = new Stack<>();
-                visited = new boolean[N][M];
+            ptList = new ArrayList<>();
+            mvList = new ArrayList<>();
+            fillList(N,M,ptList,mvList);//col first
+            calc(ptList,mvList);
+            fillList(M,N,ptList,mvList);//row first
+            calc(ptList,mvList);
 
-                dfs(planList, 0, calPlan);
-                ptList.remove(ptList.size() - 1);
-            }
             System.out.println("#" + t + " " + Answer);
         }
 
     }
+    private static void fillList(int A,int B,List<int[]> ptList,List<int[]> mvList){
+        ptList.clear();
+        mvList.clear();
+        for (int n = 0; n < A; n = n + 2) {
+            for (int m = 0; m < B; m = m + 2) {
+                ptList.add(new int[]{n, m});
+                mvList.add(new int[]{formatZero(N - n - 1), formatZero(M - m - 1)});
+            }
+        }
+    }
+    private static void calc(List<int[]> ptList,List<int[]> mvList){
 
-    public static void dfs(List<List<int[]>> planList, int deep, Stack<int[]> calPlan) {
+        while (ptList.size() > 0) {
+
+            PT_COUNT = ptList.size();
+            //System.out.println("pt size:"+ptList.size());
+            List<List<int[]>> planList = new ArrayList<>();
+            for (int x = 0; x < ptList.size(); x++) {
+                List<int[]> subPlanList = new ArrayList<>();
+                for (int n = 0; n <= mvList.get(x)[0]; n++) {
+                    for (int m = 0; m <= mvList.get(x)[1]; m++) {
+                        subPlanList.add(new int[]{ptList.get(x)[0] + n, ptList.get(x)[1] + m});
+                        //System.out.println("x:"+x+".pt:"+ptList.get(x)[0]+"+"+n+","+ptList.get(x)[1]+"+"+m);
+                    }
+                }
+                planList.add(subPlanList);
+            }
+
+            Stack<int[]> calPlan = new Stack<>();
+            visited = new boolean[N][M];
+
+            dfs(planList, 0, calPlan);
+            ptList.remove(ptList.size() - 1);
+        }
+    }
+
+    private static void dfs(List<List<int[]>> planList, int deep, Stack<int[]> calPlan) {
         if (deep == PT_COUNT) {
             if (calPlan.size() == PT_COUNT) {
                 int t_sum = 0;
