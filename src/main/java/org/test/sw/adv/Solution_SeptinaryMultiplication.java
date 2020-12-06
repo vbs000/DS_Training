@@ -28,7 +28,7 @@ public class Solution_SeptinaryMultiplication {
     private static String multiply(String numA,String numB){
 
         int digits = getDigits(numA)+getDigits(numB);
-        System.out.println("digits:"+digits);
+        //System.out.println("digits:"+digits);
         numA = numA.replace(".","");
         numB = numB.replace(".","");
 
