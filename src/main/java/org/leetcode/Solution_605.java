@@ -1,5 +1,9 @@
 package org.leetcode;
-
+/**
+ * 605. 种花问题
+ * 难度：简单
+ * 算法：贪心（理想间隔模型）
+ */
 public class Solution_605 {
     public static void main(String[] args) {
         System.out.println(canPlaceFlowers(new int[]{1,0,0,0,1},1));

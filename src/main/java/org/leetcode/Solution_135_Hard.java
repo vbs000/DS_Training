@@ -3,9 +3,9 @@ package org.leetcode;
 import java.util.Arrays;
 
 /**
- * 455. 分发饼干
- * 难度：简单
- * 算法：贪心
+ * 135.分发糖果
+ * 难度：困难
+ * 算法：贪心（两侧分别遍历一遍）
  */
 public class Solution_135_Hard {
 

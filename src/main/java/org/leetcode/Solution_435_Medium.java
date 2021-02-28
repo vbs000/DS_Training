@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * 435.无重叠区间
+ * 难度：中等
+ * 算法：贪心（区间结尾排序后，排除相交区间）
+ */
 public class Solution_435_Medium {
     public static void main(String[] args) {
         int answer = 0;
