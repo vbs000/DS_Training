@@ -5,7 +5,7 @@ package org.leetcode.double_pointer;
  * 难度：简单
  * 算法：双指针
  */
-public class Solution167 {
+public class Solution_167 {
     public static void main(String[] args) {
         System.out.println(twoSum(new int[]{2,7,11,15},9));
     }
