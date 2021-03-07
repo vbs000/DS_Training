@@ -7,7 +7,7 @@ import java.util.List;
  * 难度：中等
  * 算法：同向快慢指针，两次相遇
  */
-public class Solution_142 {
+public class Solution_142_Medium {
     public static void main(String[] args) {
         ListNode n1 = new ListNode(3);
         ListNode n2 = new ListNode(2);

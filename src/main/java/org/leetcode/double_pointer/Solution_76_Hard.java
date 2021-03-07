@@ -5,7 +5,7 @@ package org.leetcode.double_pointer;
  * 难度：困难
  * 算法：滑动窗口
  */
-public class Solution_76 {
+public class Solution_76_Hard {
     public static void main(String[] args) {
         System.out.println(minWindow("ADOBECODEBANC","ABC"));
     }
