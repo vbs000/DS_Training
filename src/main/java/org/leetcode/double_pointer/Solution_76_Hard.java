@@ -18,27 +18,28 @@ public class Solution_76_Hard {
      * @return
      */
     public static String minWindow(String s, String t) {
+        //ASCII表
         int[] charCntArr = new int[128];
         boolean[] flagArr = new boolean[128];
         for(int i=0;i< t.length(); ++i){
-            flagArr[t.charAt(i)] = true;
-            ++charCntArr[t.charAt(i)];
+            flagArr[t.charAt(i)] = true;//标记是否存在
+            ++charCntArr[t.charAt(i)];//标记存在数量
         }
         int cnt = 0,l = 0, min_l = 0, min_size = s.length() +1;
         for(int r = 0;r<s.length();++r){
-            if(flagArr[s.charAt(r)]){
-                if(--charCntArr[s.charAt(r)] >= 0){
-                    ++cnt;
+            if(flagArr[s.charAt(r)]){//如果存在
+                if(--charCntArr[s.charAt(r)] >= 0){//可用，且还有数量可以用
+                    ++cnt;//用掉总数
                 }
-                while(cnt == t.length()){
+                while(cnt == t.length()){//如果刚好已经满足了
                     if(r - l +1 < min_size){
                         min_l = l;
                         min_size = r - l + 1;
                     }
                     if(flagArr[s.charAt(l)] && ++charCntArr[s.charAt(l)] >0){
-                        --cnt;
+                        --cnt;//如果向右移动指针会去掉必要项目，则会跳出循环
                     }
-                    ++l;
+                    ++l;//尝试将左指针向右移动
                 }
             }
         }
