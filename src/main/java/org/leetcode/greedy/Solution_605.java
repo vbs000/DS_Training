@@ -1,4 +1,4 @@
-package org.leetcode;
+package org.leetcode.greedy;
 /**
  * 605. 种花问题
  * 难度：简单
