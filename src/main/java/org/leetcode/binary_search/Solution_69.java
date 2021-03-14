@@ -7,7 +7,7 @@ package org.leetcode.binary_search;
  */
 public class Solution_69 {
     public static void main(String[] args) {
-
+        System.out.println(mySqrt(8));
     }
 
     /**
