@@ -3,11 +3,12 @@ package org.leetcode.binary_search;
 /**
  * 69. x 的平方根
  * 难度：简单
- * 方法：二分查找
+ * 方法：二分查找/牛顿法
  */
 public class Solution_69 {
     public static void main(String[] args) {
         System.out.println(mySqrt(8));
+        System.out.println(mySqrt2(8));
     }
 
     /**
@@ -31,5 +32,19 @@ public class Solution_69 {
             }
         }
         return r;
+    }
+
+    /**
+     * 执行用时：2 ms, 在所有 Java 提交中击败了46.89%的用户
+     * 内存消耗：35.4 MB, 在所有 Java 提交中击败了72.97%的用户
+     * @param x
+     * @return
+     */
+    public static int mySqrt2(int x){
+        long fx = x;
+        while(fx*fx>x){
+            fx = (fx + x/fx)/2;
+        }
+        return (int)fx;
     }
 }

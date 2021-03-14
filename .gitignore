@@ -1,3 +1,5 @@
 /bin/
 /.svn/
 /target/classes/org/
+/target/
+/.idea/
