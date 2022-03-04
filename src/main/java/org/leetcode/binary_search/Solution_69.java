@@ -36,8 +36,9 @@ public class Solution_69 {
 
     /**
      * 执行用时：2 ms, 在所有 Java 提交中击败了46.89%的用户
-     * 内存消耗：35.4 MB, 在所有 Java 提交中击败了72.97%的用户
+     * 内存消耗：35.4 MB, 在所有 Java 提交中击败了72.97%
      * @param x
+     * 
      * @return
      */
     public static int mySqrt2(int x){
